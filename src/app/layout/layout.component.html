@@ -1,11 +1,18 @@
-<form>
+<form [formGroup]="radioForm" (ngSubmit)="submitForm()">
   <div class="form-group" *ngFor="let number of numbers">
-    <p-radio shape="round" color="primary">
+    <p-radio shape="round" color="primary"
+      [checked]="isInitialValue(number.value)" name="number"
+      [value]="number.value" (change)="onSelectRadio($event)">
       {{number.name}}
     </p-radio>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">
+      Enviar
+    </button>
   </div>
 </form>
 
 <hr>
 
-<p>Aquí va a ir la opción seleccionada.</p>
+<p>Opción seleccionada: {{radioForm.value.number}}</p>
