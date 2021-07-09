@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { PrettyCheckBoxChange, PrettyRadioChange } from 'ngx-pretty-checkbox';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PrettyRadioChange } from 'ngx-pretty-checkbox';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-layout',
@@ -20,12 +21,13 @@ export class LayoutComponent implements OnInit {
   initialValue = 0;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.radioForm = this.fb.group({
-      number: this.fb.control(0)
+      number: this.fb.control(0, [Validators.required])
     });
   }
 
@@ -38,6 +40,6 @@ export class LayoutComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log(this.radioForm.value);
+    this.toastr.success(`Opción seleccionada: ${this.radioForm.value.number}`, 'Formulario enviado');
   }
 }

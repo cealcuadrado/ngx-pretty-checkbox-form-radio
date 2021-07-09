@@ -7,7 +7,8 @@
     </p-radio>
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary"
+      [disabled]="radioForm.invalid">
       Enviar
     </button>
   </div>
